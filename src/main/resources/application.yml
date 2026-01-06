@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: payment-initiation-service
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/paymentdb
+    username: postgres
+    password: postgres
+  sql:
+    init:
+      mode: always
+
+server:
+  port: 9999
