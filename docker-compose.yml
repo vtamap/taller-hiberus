@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  payment-service:
+    build: .
+    ports:
+      - "9999:9999"
+    environment:
+      - SPRING_R2DBC_URL=r2dbc:postgresql://postgres:5432/paymentdb
+      - SPRING_R2DBC_USERNAME=postgres
+      - SPRING_R2DBC_PASSWORD=postgres
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=paymentdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
